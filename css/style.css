@@ -45,8 +45,17 @@ body.hc-mode {
   color: #fff;
 }
 
-/* grayscale mode */
-body.gs-mode { filter: grayscale(1); }
+/* grayscale mode — uses backdrop-filter on a pseudo-element so the
+   accessibility button (z-index:9000) stays above it and remains usable */
+body.gs-mode::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  backdrop-filter: grayscale(1);
+  -webkit-backdrop-filter: grayscale(1);
+  pointer-events: none;
+  z-index: 8999; /* below #a11y-btn (9000) and #a11y-menu (9001) */
+}
 
 /* stop animations */
 body.no-anim *, body.no-anim *::before, body.no-anim *::after {
