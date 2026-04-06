@@ -12,7 +12,7 @@
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLRTXhwajmDfceJrm4gBfv99jv8giHYONf7JBZUJ0Royis5vXvlQtoy3YJx3Ja9Cnq/exec';
 
 /* ─ REPLACE with your Calendly URL ─ */
-const CALENDLY_URL = 'https://calendly.com/YOUR_USERNAME';
+const CALENDLY_URL = 'https://calendly.com/il-frameim/30min';
 
 /* ══════════════════════════════════════
    CUSTOM CURSOR
