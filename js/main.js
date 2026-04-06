@@ -160,6 +160,7 @@ function initLeadForm(formEl) {
       const data = await res.json();
 
       if (data.result === 'success') {
+        sessionStorage.setItem('frameim_lead_email', email); // save for Calendly listener
         formEl.reset();
         showMsg(msgEl, 'פרטייך התקבלו! מעביר אותך לדף הקביעת פגישה…', 'success');
         setTimeout(() => {
@@ -221,31 +222,33 @@ function injectForms() {
 function initCalendlyListener() {
   window.addEventListener('message', async e => {
     if (e.data?.event === 'calendly.event_scheduled') {
-      const invitee = e.data.payload?.invitee;
-      if (!invitee) return;
+      const calendlyPayload = e.data.payload || {};
+      const invitee  = calendlyPayload.invitee || {};
+      const event    = calendlyPayload.event   || {};
 
-      const email    = invitee.email || '';
-      const datetime = invitee.event?.start_time || '';
-
-      // Try to get email from sessionStorage (set after form submit)
-      const storedEmail = sessionStorage.getItem('frameim_lead_email') || email;
+      // email: prefer what was stored at form submit, fallback to Calendly invitee email
+      const email    = sessionStorage.getItem('frameim_lead_email') || invitee.email || '';
+      const datetime = event.start_time || '';
 
       const payload = new FormData();
-      payload.append('action',        'update_booking');
-      payload.append('email',         storedEmail);
-      payload.append('meeting_booked','כן');
-      payload.append('meeting_date',  datetime ? new Date(datetime).toLocaleString('he-IL') : '');
+      payload.append('action',         'update_booking');
+      payload.append('email',          email);
+      payload.append('meeting_booked', 'כן');
+      payload.append('meeting_date',   datetime ? new Date(datetime).toLocaleString('he-IL') : '');
 
       try {
-        await fetch(SCRIPT_URL, { method: 'POST', body: payload });
+        // no-cors so the request always reaches Apps Script regardless of redirect headers
+        await fetch(SCRIPT_URL, { method: 'POST', body: payload, mode: 'no-cors' });
       } catch {
         // silent — main lead was already captured
       }
 
+      sessionStorage.removeItem('frameim_lead_email');
+
       // Redirect to thank-you
       setTimeout(() => {
         window.location.href = 'thank-you.html?booked=1';
-      }, 800);
+      }, 1000);
     }
   });
 }
