@@ -9,7 +9,7 @@
    3. Deploy → New deployment → Web app → Anyone
    4. Copy the URL and paste it below
 */
-const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLRTXhwajmDfceJrm4gBfv99jv8giHYONf7JBZUJ0Royis5vXvlQtoy3YJx3Ja9Cnq/exec';
 
 /* ─ REPLACE with your Calendly URL ─ */
 const CALENDLY_URL = 'https://calendly.com/YOUR_USERNAME';
