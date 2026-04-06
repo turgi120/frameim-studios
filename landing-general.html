@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="פריימים סטודיו — תוכן וידאו שיווקי לבעלי עסקים. תוכן איכותי שמביא לקוחות איכותיים." />
+  <title>תוכן שמדבר בשפת הלקוח | פריימים סטודיו</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="landing-page">
+
+  <div id="cursor"></div>
+
+  <!-- LOGO BAR (no full header on landing) -->
+  <div class="landing-logo-bar">
+    <img src="FRAMEIM_LOGO_WIDE.png" alt="פריימים" height="32" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';" />
+    <span class="logo-fallback" style="display:none;font-family:var(--font-sans);font-weight:900;font-size:20px;color:#fff">FRAME<span style="color:var(--accent)">IM</span></span>
+  </div>
+
+  <!-- HERO -->
+  <div class="landing-hero">
+    <div class="landing-badge">לבעלי עסקים</div>
+    <h1 class="landing-title fade-up">
+      הגיע הזמן<br>
+      שהלקוחות<br>
+      יראו <span class="red">מי אתה</span>
+    </h1>
+    <p class="landing-sub fade-up delay-1">
+      תוכן זול ימשוך לקוח זול.<br>
+      תוכן איכותי ימשוך לקוח איכותי.<br>
+      אנחנו עוזרים לך להיות בצד הנכון.
+    </p>
+
+    <div class="landing-form-wrap fade-up delay-2">
+      <div class="lead-form-container" data-source="landing-general"></div>
+    </div>
+  </div>
+
+  <hr class="landing-divider" />
+
+  <!-- WHY US -->
+  <div class="landing-why">
+    <div class="landing-why-item" data-reveal>
+      <div class="landing-why-num">01</div>
+      <div class="landing-why-title">סיפור שנוגע</div>
+      <div class="landing-why-text">לא סתם סרטון — נרטיב שמחבר את הלקוח לעסק שלך ברמה הרגשית.</div>
+    </div>
+    <div class="landing-why-item" data-reveal>
+      <div class="landing-why-num">02</div>
+      <div class="landing-why-title">מסר שפוגע</div>
+      <div class="landing-why-text">בכל פריים מושקעת מחשבה. כל שניה עובדת בשבילך.</div>
+    </div>
+    <div class="landing-why-item" data-reveal>
+      <div class="landing-why-num">03</div>
+      <div class="landing-why-title">תוצאות אמיתיות</div>
+      <div class="landing-why-text">תוכן שמביא לידים, שומר על לקוחות, ובונה מותג לאורך זמן.</div>
+    </div>
+  </div>
+
+  <div class="landing-footer-bar">
+    כל הזכויות שמורות לסטודיו פריימים &nbsp;|&nbsp; <a href="privacy.html" style="color:inherit">מדיניות פרטיות</a>
+  </div>
+
+  <button id="a11y-btn" aria-label="נגישות">♿</button>
+  <div id="a11y-menu"></div>
+  <div id="cookie-banner" role="alert">
+    <p>אנו משתמשים בעוגיות. <a href="privacy.html">מדיניות פרטיות</a></p>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-accept" id="cookie-accept">אני מאשר</button>
+      <button class="cookie-btn cookie-decline" id="cookie-decline">דחה</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

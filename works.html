@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="העבודות של פריימים סטודיו — סרטוני מותג, קמפיינים ותוכן לרשתות חברתיות." />
+  <title>עבודות | פריימים סטודיו</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="has-header">
+
+  <div id="cursor"></div>
+
+  <!-- HEADER -->
+  <header id="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="header-logo">
+        <img src="FRAMEIM_LOGO_WIDE.png" alt="פריימים סטודיו" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+        <span class="logo-fallback" style="display:none">FRAME<span>IM</span></span>
+      </a>
+      <ul class="header-nav">
+        <li><a href="index.html">בית</a></li>
+        <li><a href="works.html">עבודות</a></li>
+        <li><a href="index.html#about">עלינו</a></li>
+        <li><a href="index.html#contact" class="btn btn-accent header-cta">בואו נדבר</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close">✕</button>
+    <a href="index.html">בית</a>
+    <a href="works.html">עבודות</a>
+    <a href="index.html#about">עלינו</a>
+    <a href="index.html#contact">צור קשר</a>
+  </nav>
+
+  <!-- WORKS HERO -->
+  <section class="works-hero">
+    <div class="container">
+      <p class="hero-label fade-up">הפורטפוליו שלנו</p>
+      <h1 class="hero-title fade-up delay-1">
+        <span class="f">העבודות</span><br>שלנו
+      </h1>
+    </div>
+    <div class="hero-number">02</div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- FILTER BAR -->
+  <div style="padding: 32px 0; background: var(--cream);">
+    <div class="container">
+      <div id="filter-bar" style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary filter-btn active" data-cat="all">הכל</button>
+        <button class="btn btn-outline filter-btn" data-cat="brand">סרטוני מותג</button>
+        <button class="btn btn-outline filter-btn" data-cat="social">רשתות חברתיות</button>
+        <button class="btn btn-outline filter-btn" data-cat="realestate">נדל״ן</button>
+        <button class="btn btn-outline filter-btn" data-cat="campaign">קמפיינים</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKS GRID -->
+  <section style="padding: 4px 0 0; background: var(--cream);">
+    <div class="works-full-grid" id="works-grid">
+
+      <div class="work-item" data-cat="brand">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">סרטון מותג</p>
+          <p class="work-title">לקוח א׳ — סרטון תדמית</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="social">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">רשתות חברתיות</p>
+          <p class="work-title">לקוח ב׳ — קמפיין רילס</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="realestate">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">נדל״ן</p>
+          <p class="work-title">לקוח ג׳ — סרטון נכס יוקרה</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="campaign">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">קמפיין</p>
+          <p class="work-title">לקוח ד׳ — פייסבוק Ads</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="brand">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">סרטון מותג</p>
+          <p class="work-title">לקוח ה׳ — וידאו לאנשי מקצוע</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="social">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">רשתות חברתיות</p>
+          <p class="work-title">לקוח ו׳ — תוכן אינסטגרם</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="realestate">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">נדל״ן</p>
+          <p class="work-title">לקוח ז׳ — פרויקט בנייה</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="campaign">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">קמפיין</p>
+          <p class="work-title">לקוח ח׳ — השקת מוצר</p>
+        </div>
+      </div>
+
+      <div class="work-item" data-cat="brand">
+        <div class="work-placeholder">▶</div>
+        <div class="work-overlay">
+          <p class="work-cat">סרטון מותג</p>
+          <p class="work-title">לקוח ט׳ — סרטון אודות</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider" style="margin-top:4px"></div>
+
+  <!-- LEAD FORM -->
+  <section class="form-section" id="contact">
+    <div class="container">
+      <div class="form-grid">
+        <div data-reveal>
+          <h2 class="form-headline">
+            <span class="f">מוכנים</span><br>
+            ליצור<br>
+            <span class="red">ביחד?</span>
+          </h2>
+          <p class="form-sub" style="margin-top:24px">
+            השאירו פרטים ונחזור אליכם לשיחת ייעוץ חינמית.
+          </p>
+        </div>
+        <div data-reveal>
+          <div class="lead-form-container" data-source="works"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="FRAMEIM_LOGO_WIDE.png" alt="פריימים" height="28" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+        <span class="logo-fallback" style="display:none">FRAME<span>IM</span></span>
+      </div>
+      <p class="footer-copy">כל הזכויות שמורות לסטודיו פריימים</p>
+      <div class="footer-social">
+        <a href="#" aria-label="אינסטגרם">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" aria-label="פייסבוק">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="a11y-btn" aria-label="נגישות">♿</button>
+  <div id="a11y-menu"></div>
+  <div id="cookie-banner" role="alert">
+    <p>אנו משתמשים בעוגיות. <a href="privacy.html">מדיניות פרטיות</a></p>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-accept" id="cookie-accept">אני מאשר</button>
+      <button class="cookie-btn cookie-decline" id="cookie-decline">דחה</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Filter logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('btn-primary');
+          b.classList.add('btn-outline');
+        });
+        btn.classList.add('btn-primary');
+        btn.classList.remove('btn-outline');
+
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('#works-grid .work-item').forEach(item => {
+          item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
