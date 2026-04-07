@@ -164,7 +164,7 @@ function initLeadForm(formEl) {
         formEl.reset();
         showMsg(msgEl, 'פרטייך התקבלו! מעביר אותך לדף הקביעת פגישה…', 'success');
         setTimeout(() => {
-          window.location.href = `booking.html?source=${source}`;
+          window.location.href = `booking.html?source=${source}&email=${encodeURIComponent(email)}`;
         }, 1400);
       } else {
         throw new Error('server error');

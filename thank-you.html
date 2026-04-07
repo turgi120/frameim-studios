@@ -37,6 +37,20 @@
     if (params.get('booked') === '1') {
       document.getElementById('thank-msg').innerHTML =
         'הפגישה נקבעה בהצלחה! 🎉<br>פרטים יישלחו אליך במייל. מצפים לשיחה!';
+
+      // Update Google Sheets — this is the primary (most reliable) method
+      const email = sessionStorage.getItem('frameim_lead_email') || '';
+      if (email) {
+        const fd = new FormData();
+        fd.append('action',         'update_booking');
+        fd.append('email',          email);
+        fd.append('meeting_booked', 'כן');
+        fd.append('meeting_date',   new Date().toLocaleString('he-IL'));
+        fetch('https://script.google.com/macros/s/AKfycbzLRTXhwajmDfceJrm4gBfv99jv8giHYONf7JBZUJ0Royis5vXvlQtoy3YJx3Ja9Cnq/exec',
+          { method: 'POST', body: fd, mode: 'no-cors' }
+        ).catch(() => {});
+        sessionStorage.removeItem('frameim_lead_email');
+      }
     }
   </script>
 </body>
