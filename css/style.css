@@ -342,6 +342,7 @@ section { position: relative; }
   letter-spacing: -0.04em;
   font-weight: 900;
   margin-bottom: 40px;
+  color: var(--accent);
 }
 
 .hero-title .f {
