@@ -41,7 +41,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 52px;
+      padding: 0 60px;
       background: rgba(255,255,255,0.72);
       backdrop-filter: saturate(200%) blur(24px);
       -webkit-backdrop-filter: saturate(200%) blur(24px);
@@ -52,39 +52,14 @@
     .logo-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
     }
 
-    .logo-text {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      color: var(--black);
-      line-height: 1;
+    .logo-wrap img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
-
-    .logo-frame {
-      width: 26px;
-      height: 26px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .logo-frame::before, .logo-frame::after,
-    .logo-frame span::before, .logo-frame span::after {
-      content: '';
-      position: absolute;
-      width: 9px;
-      height: 9px;
-      border-color: var(--red);
-      border-style: solid;
-    }
-    .logo-frame::before  { top:0;    right:0;  border-width: 2.5px 2.5px 0 0; }
-    .logo-frame::after   { bottom:0; right:0;  border-width: 0 2.5px 2.5px 0; }
-    .logo-frame span::before { top:0;    left:0;  border-width: 2.5px 0 0 2.5px; }
-    .logo-frame span::after  { bottom:0; left:0;  border-width: 0 0 2.5px 2.5px; }
-    .logo-frame span { position: absolute; inset: 0; }
 
     /* Nav pill */
     .nav-pill {
@@ -152,65 +127,62 @@
     ───────────────────────────── */
     #hero {
       min-height: 100vh;
-      padding: 140px 52px 80px;
+      /* top padding = header height so content centers in the visible area below it */
+      padding: 72px 60px 60px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       background: var(--white);
-      position: relative;
+      overflow: hidden;
     }
 
     .hero-label {
-      font-size: 12.5px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      margin-bottom: 36px;
-      text-align: left;
+      font-size: 13px;
+      color: #aaa;
       font-weight: 400;
-    }
-
-    .hero-body {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 48px;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+      /* text-align: right is the RTL default — keeps label at right edge */
     }
 
     .hero-headline {
-      font-size: clamp(60px, 7.5vw, 108px);
+      /* size tuned so the full string fits on one line at 1280-1920px */
+      font-size: clamp(44px, 5.8vw, 88px);
       font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.025em;
+      line-height: 1;
+      letter-spacing: -0.03em;
       color: var(--black);
-      flex: 1.2;
+      white-space: nowrap;
+      margin-bottom: 56px;
     }
 
-    .hero-aside {
-      flex: 0 0 340px;
-      padding-bottom: 8px;
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 32px;
     }
 
-    .hero-aside p {
-      font-size: 17px;
-      line-height: 1.65;
+    /* In RTL flex-row: first child = right side, second child = left side */
+    .hero-desc {
+      flex-shrink: 1;
+    }
+
+    .hero-desc p {
+      font-size: 16px;
+      line-height: 1.7;
       color: var(--red);
       font-weight: 600;
-      margin-bottom: 0;
     }
 
     .hero-ctas {
       display: flex;
-      gap: 12px;
-      margin-top: 56px;
+      gap: 10px;
       align-items: center;
+      flex-shrink: 0;
     }
 
-    .hero-rule {
-      margin-top: 80px;
-      height: 1px;
-      width: 65%;
-      background: linear-gradient(to left, var(--red) 0%, rgba(227,30,36,0.2) 70%, transparent 100%);
-    }
+    .hero-rule { display: none; }
 
     /* ─────────────────────────────
        ABOUT
@@ -524,9 +496,9 @@
 
       #hero, #about, #process, #works, #contact, #brands { padding-right: 20px; padding-left: 20px; }
 
-      .hero-body { flex-direction: column; align-items: flex-start; gap: 24px; }
-      .hero-aside { flex: unset; }
-      .hero-rule  { width: 90%; }
+      .hero-headline { white-space: normal; font-size: clamp(40px, 10vw, 80px); }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .hero-rule { width: 100%; }
 
       #about { flex-direction: column; gap: 40px; }
       .about-left { max-width: 100%; }
@@ -542,8 +514,10 @@
 
   <!-- ══ HEADER ══ -->
   <header id="site-header">
-    <!-- Left: CTA (in RTL this renders on the left) -->
-    <a href="#contact" class="btn-red">בואו נדבר</a>
+    <!-- Right: Logo (first child in RTL = right side) -->
+    <a href="#hero" class="logo-wrap">
+      <img src="frameim-logo.png" alt="FRAMEIM" />
+    </a>
 
     <!-- Center: Nav -->
     <nav class="nav-pill">
@@ -552,11 +526,8 @@
       <a href="#about">אודות</a>
     </nav>
 
-    <!-- Right: Logo -->
-    <a href="#hero" class="logo-wrap">
-      <span class="logo-text">FRAMEIM</span>
-      <span class="logo-frame"><span></span></span>
-    </a>
+    <!-- Left: CTA (last child in RTL = left side) -->
+    <a href="#contact" class="btn-red">בואו נדבר</a>
   </header>
 
 
@@ -564,22 +535,17 @@
   <section id="hero">
     <p class="hero-label">פריימים הפקות קריאטיב ומהלכי שיווק &nbsp;—</p>
 
-    <div class="hero-body">
-      <h1 class="hero-headline">יוצרים אומנות<br>מדברים עסקים</h1>
+    <h1 class="hero-headline">יוצרים אומנות מדברים עסקים</h1>
 
-      <div class="hero-aside">
-        <p>
-          לא כל סרטון מספר סיפור,<br>
-          לא כל סיפור מייצר תחושה.<br>
-          אנחנו משלבים את שניהם<br>
-          כדי ליצור קמפיין שיווקי מוצלח
-        </p>
+    <div class="hero-bottom">
+      <div class="hero-desc">
+        <p>לא כל סרטון מספר סיפור, לא כל סיפור מייצר תחושה</p>
+        <p>אנחנו משלבים את שניהם כדי ליצור קמפיין שיווקי מוצלח</p>
       </div>
-    </div>
-
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-red">התחל פרויקט</a>
-      <a href="#works"   class="btn-gray">לצפייה בעבודות</a>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-red">התחל פרויקט</a>
+        <a href="#works"   class="btn-gray">לצפייה בעבודות</a>
+      </div>
     </div>
 
     <div class="hero-rule"></div>
@@ -704,7 +670,7 @@
 
   <!-- ══ FOOTER ══ -->
   <footer>
-    <span class="footer-logo">FRAMEIM</span>
+    <img src="frameim-logo.png" alt="FRAMEIM" style="height:28px;width:auto;filter:brightness(0) invert(1);">
     <span class="footer-copy">© 2025 כל הזכויות שמורות לסטודיו פריימים</span>
     <div class="footer-links">
       <a href="#">אינסטגרם</a>
