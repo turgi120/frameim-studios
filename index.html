@@ -43,10 +43,8 @@
       transform: translate(-50%, -50%);
     }
 
-    /* on hover: white fill + difference = true color inversion of whatever is underneath */
     .cursor.hovering {
-      background: #ffffff;
-      mix-blend-mode: difference;
+      background: var(--red);
     }
 
     .cursor-ring {
@@ -62,8 +60,7 @@
     }
 
     .cursor-ring.hovering {
-      border-color: #ffffff;
-      mix-blend-mode: difference;
+      border-color: var(--red);
     }
 
     /* ─────────────────────────────
