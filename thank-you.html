@@ -1,44 +1,25 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>תודה! | פריימים סטודיו</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div id="cursor"></div>
 
-  <section class="thankyou-section">
-    <div class="thankyou-icon">✓</div>
-    <h1 class="thankyou-title fade-up">
-      <span class="f" style="font-family:'Frank Ruhl Libre',serif;font-weight:300;font-style:italic">תודה</span><br>
-      <span style="color:var(--accent)">רבה!</span>
-    </h1>
-    <p class="thankyou-sub fade-up delay-1" id="thank-msg">
-      פרטייך התקבלו בהצלחה.<br>
-      ניצור איתך קשר בהקדם לתיאום שיחת הכרות.
-    </p>
-    <div class="fade-up delay-2">
-      <a href="index.html" class="btn btn-primary">חזרה לדף הבית</a>
-      <a href="works.html" class="btn btn-outline" style="margin-right:16px">לעבודות שלנו</a>
-    </div>
-  </section>
-
-  <button id="a11y-btn" aria-label="נגישות">♿</button>
-  <div id="a11y-menu"></div>
+  <h1>תודה רבה!</h1>
+  <p id="thank-msg">פרטייך התקבלו בהצלחה. ניצור איתך קשר בהקדם לתיאום שיחת הכרות.</p>
+  <a href="index.html">חזרה לדף הבית</a>
+  &nbsp;
+  <a href="works.html">לעבודות שלנו</a>
 
   <script src="js/main.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     if (params.get('booked') === '1') {
       document.getElementById('thank-msg').innerHTML =
-        'הפגישה נקבעה בהצלחה! 🎉<br>פרטים יישלחו אליך במייל. מצפים לשיחה!';
+        'הפגישה נקבעה בהצלחה! פרטים יישלחו אליך במייל. מצפים לשיחה!';
 
-      // Update Google Sheets — this is the primary (most reliable) method
       const email = sessionStorage.getItem('frameim_lead_email') || '';
       if (email) {
         const fd = new FormData();

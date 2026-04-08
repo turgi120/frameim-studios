@@ -3,326 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frameim Studios</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: #ffffff;
-      color: #111111;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      direction: rtl;
-    }
-
-    /* ── Header ── */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.1rem 2.5rem;
-      background-color: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      color: #111111;
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    .logo .brackets {
-      color: #FF0000;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: #444;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-
-    nav a:hover {
-      color: #FF0000;
-    }
-
-    .btn-contact {
-      background-color: #FF0000;
-      color: #ffffff;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    .btn-contact:hover {
-      background-color: #cc0000;
-      transform: translateY(-1px);
-    }
-
-    /* ── Hero ── */
-    .hero-wrapper {
-      padding: 2rem 2.5rem;
-    }
-
-    .hero {
-      background-color: #111111;
-      border-radius: 20px;
-      padding: 5rem 3rem 3rem;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    /* Corner arrows */
-    .hero::before,
-    .hero::after,
-    .hero .corner-bl,
-    .hero .corner-br {
-      content: '';
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-color: #FF0000;
-      border-style: solid;
-    }
-
-    .hero::before {
-      top: 16px;
-      right: 16px;
-      border-width: 2px 2px 0 0;
-    }
-
-    .hero::after {
-      top: 16px;
-      left: 16px;
-      border-width: 2px 0 0 2px;
-    }
-
-    .hero .corner-bl {
-      bottom: 50px;
-      right: 16px;
-      border-width: 0 2px 2px 0;
-    }
-
-    .hero .corner-br {
-      bottom: 50px;
-      left: 16px;
-      border-width: 0 0 2px 2px;
-    }
-
-    .hero-content {
-      max-width: 660px;
-      margin: 0 auto;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #FF0000;
-      line-height: 1.15;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: #aaaaaa;
-      margin-bottom: 2rem;
-    }
-
-    .btn-hero {
-      display: inline-block;
-      background-color: #FF0000;
-      color: #ffffff;
-      padding: 0.85rem 2.2rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    .btn-hero:hover {
-      background-color: #cc0000;
-      transform: translateY(-1px);
-    }
-
-    /* Slider controls */
-    .slider-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 3rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .slider-arrow {
-      width: 0;
-      height: 0;
-      cursor: pointer;
-      user-select: none;
-      transition: border-color 0.2s;
-    }
-
-    .slider-arrow.left {
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-right: 13px solid #666;
-    }
-
-    .slider-arrow.right {
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-left: 13px solid #666;
-    }
-
-    .slider-arrow.left:hover {
-      border-right-color: #aaa;
-    }
-
-    .slider-arrow.right:hover {
-      border-left-color: #aaa;
-    }
-
-    .slider-dots {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .slider-line {
-      width: 28px;
-      height: 2px;
-      background-color: #444;
-      border-radius: 2px;
-    }
-
-    .slider-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: #FF0000;
-    }
-
-    /* ── Why Us Section ── */
-    .why-us {
-      padding: 5rem 2.5rem;
-      background-color: #ffffff;
-    }
-
-    .why-us-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-    }
-
-    .why-text {
-      flex: 1;
-    }
-
-    .why-text h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #FF0000;
-      margin-bottom: 1.2rem;
-      line-height: 1.2;
-    }
-
-    .why-text p {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: #444;
-    }
-
-    .why-image {
-      flex: 1;
-      aspect-ratio: 4 / 3;
-      background-color: #f0f0f0;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #bbb;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      border: 1px solid #e0e0e0;
-      min-height: 260px;
-    }
-  </style>
+  <title>פריימים סטודיו | תוכן וידאו שיווקי</title>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
-    <a href="index.html" class="logo">FRAMEIM<span class="brackets"> [ ]</span></a>
+    <a href="index.html">FRAMEIM סטודיו</a>
     <nav>
       <a href="index.html">בית</a>
-      <a href="about.html">אודות</a>
-      <a href="services.html">שירותים</a>
-      <a href="mailto:hello@frameimstudios.com" class="btn-contact">צור קשר</a>
+      <a href="works.html">עבודות</a>
+      <a href="#about">עלינו</a>
+      <a href="#contact">צור קשר</a>
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero-wrapper">
-    <div class="hero">
-      <span class="corner-bl"></span>
-      <span class="corner-br"></span>
-
-      <div class="hero-content">
-        <h1>יוצרים תוכן<br>שעוצר הגלילה</h1>
-        <p>סטודיו להפקות וידאו, קריאייטיב ופרסומות</p>
-        <a href="about.html" class="btn-hero">לעבודות שלנו</a>
-      </div>
-
-      <div class="slider-controls">
-        <span class="slider-arrow left"></span>
-        <div class="slider-dots">
-          <div class="slider-line"></div>
-          <div class="slider-dot"></div>
-          <div class="slider-line"></div>
-        </div>
-        <span class="slider-arrow right"></span>
-      </div>
-    </div>
+  <section>
+    <h1>יוצרים אומנות, מדברים עסקים</h1>
+    <p>סטודיו לתוכן וידאו שיווקי</p>
+    <a href="#contact">בואו נעשה משהו יחד</a>
+    &nbsp;
+    <a href="works.html">לעבודות שלנו</a>
   </section>
 
-  <!-- Why Us -->
-  <section class="why-us">
-    <div class="why-us-inner">
-      <div class="why-text">
-        <h2>למה Frameim</h2>
-        <p>
-          אנחנו לא סתם סטודיו — אנחנו השותפים הקריאייטיביים שלך.
-          ב-Frameim Studios אנו משלבים חשיבה אסטרטגית עם ביצוע קולנועי ברמה גבוהה,
-          כדי ליצור תוכן שלא רק נראה טוב — אלא עובד.
-          מפרסומות דיגיטליות ועד סרטי מותג, אנו מלווים כל פרויקט
-          מהרעיון הראשון ועד הפריים האחרון.
-        </p>
-      </div>
-      <div class="why-image">תמונה עתידית</div>
-    </div>
+  <section id="about">
+    <h2>אנחנו פריימים</h2>
+    <p>
+      אנחנו מאמינים שדומה מושך דומה.<br>
+      תוכן זול ימשוך לקוח זול.<br>
+      תוכן איכותי ימשוך לקוח איכותי.
+    </p>
+    <p>
+      לכן בכל פרויקט אנחנו שואלים: מי הלקוח שאתה רוצה למשוך?
+      ומשם — בונים תוכן שמדבר אליו ישירות.
+    </p>
+    <a href="#contact">קביעת פגישה</a>
   </section>
 
+  <section>
+    <h2>הגישה שלנו</h2>
+    <ol>
+      <li>דומה מושך דומה</li>
+      <li>תוכן איכותי ימשוך לקוח איכותי</li>
+      <li>כל פריים הוא הצהרה עסקית</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>העבודות שלנו</h2>
+    <a href="works.html">לכל העבודות</a>
+  </section>
+
+  <section id="contact">
+    <h2>בואו נעשה ביחד</h2>
+    <p>השאירו פרטים ונחזור אליכם לשיחת ייעוץ חינמית.</p>
+    <div class="lead-form-container" data-source="homepage"></div>
+  </section>
+
+  <footer>
+    <p>כל הזכויות שמורות לסטודיו פריימים</p>
+    <a href="privacy.html">מדיניות פרטיות</a>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

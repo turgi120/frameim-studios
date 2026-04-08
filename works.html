@@ -1,384 +1,88 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="העבודות של פריימים סטודיו — סרטוני מותג, קמפיינים ותוכן לרשתות חברתיות." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>עבודות | פריימים סטודיו</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* ── Works Grid ── */
-    .works-page { background: var(--ink); min-height: 100vh; }
-
-    .works-hero-section {
-      padding: 120px 0 60px;
-      background: var(--ink);
-    }
-
-    .works-hero-section .hero-label { color: var(--accent); }
-    .works-hero-section .hero-label::before { background: var(--accent); }
-
-    .works-hero-section h1 {
-      font-size: clamp(64px, 10vw, 140px);
-      font-weight: 900;
-      line-height: 0.96;
-      letter-spacing: -0.04em;
-      color: var(--white);
-    }
-
-    .works-hero-section h1 .f {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-style: italic;
-    }
-
-    /* Grid */
-    .grid-section { padding: 0 0 120px; background: var(--ink); }
-
-    #works-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-
-    .work-card {
-      position: relative;
-      aspect-ratio: 9/16;
-      overflow: hidden;
-      background: #1a1814;
-      cursor: pointer;
-    }
-
-    .work-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease, opacity 0.3s ease;
-      opacity: 0.75;
-      display: block;
-    }
-
-    .work-card:hover img { transform: scale(1.05); opacity: 1; }
-
-    .work-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(14,13,11,0.9) 0%, transparent 55%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .work-card:hover .work-card-overlay { opacity: 1; }
-
-    .work-card-play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      width: 56px;
-      height: 56px;
-      background: var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .work-card-play svg { width: 22px; height: 22px; fill: #fff; margin-right: -3px; }
-
-    .work-card:hover .work-card-play {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .work-card-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--white);
-    }
-
-    /* Skeleton loaders */
-    .work-skeleton {
-      aspect-ratio: 9/16;
-      background: linear-gradient(90deg, #1a1814 25%, #2a2620 50%, #1a1814 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    /* Empty / Error states */
-    .works-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 100px 40px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    /* ── Lightbox ── */
-    #lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.95);
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    #lightbox.open { display: flex; }
-
-    .lightbox-inner {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16/9;
-      background: #000;
-    }
-
-    /* portrait videos */
-    .lightbox-inner.portrait {
-      max-width: 420px;
-      aspect-ratio: 9/16;
-      max-height: 85vh;
-    }
-
-    #lightbox-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    #lightbox-close {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 44px;
-      height: 44px;
-      background: var(--accent);
-      border: none;
-      border-radius: 50%;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      transition: background 0.2s;
-      z-index: 10001;
-    }
-
-    #lightbox-close:hover { background: var(--ink); }
-
-    /* Lead form on dark bg */
-    .works-form-section {
-      background: var(--ink);
-      padding: 0 0 120px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    @media (max-width: 768px) {
-      #works-grid { grid-template-columns: repeat(2, 1fr); }
-      .works-hero-section { padding: 100px 0 40px; }
-    }
-
-    @media (max-width: 480px) {
-      #works-grid { grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
-<body class="has-header works-page">
+<body>
 
-  <div id="cursor"></div>
-
-  <!-- HEADER -->
-  <header id="site-header" style="background:rgba(14,13,11,0.85);border-bottom-color:rgba(255,255,255,0.08);">
-    <div class="container header-inner">
-      <a href="index.html" class="header-logo">
-        <img src="FRAMEIM_LOGO_WIDE.png" alt="פריימים סטודיו" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-        <span class="logo-fallback" style="display:none;color:var(--white)">FRAME<span>IM</span></span>
-      </a>
-      <ul class="header-nav">
-        <li><a href="index.html" style="color:rgba(253,250,245,0.7)">בית</a></li>
-        <li><a href="works.html" style="color:var(--white)">עבודות</a></li>
-        <li><a href="index.html#about" style="color:rgba(253,250,245,0.7)">עלינו</a></li>
-        <li><a href="index.html#contact" class="btn btn-accent header-cta">בואו נדבר</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="תפריט">
-        <span style="background:var(--white)"></span>
-        <span style="background:var(--white)"></span>
-        <span style="background:var(--white)"></span>
-      </button>
-    </div>
+  <header>
+    <a href="index.html">FRAMEIM סטודיו</a>
+    <nav>
+      <a href="index.html">בית</a>
+      <a href="works.html">עבודות</a>
+      <a href="index.html#about">עלינו</a>
+      <a href="index.html#contact">צור קשר</a>
+    </nav>
   </header>
 
-  <nav class="mobile-nav" id="mobile-nav">
-    <button class="mobile-nav-close" id="mobile-nav-close">✕</button>
-    <a href="index.html">בית</a>
-    <a href="works.html">עבודות</a>
-    <a href="index.html#about">עלינו</a>
-    <a href="index.html#contact">צור קשר</a>
-  </nav>
-
-  <!-- HERO -->
-  <section class="works-hero-section">
-    <div class="container">
-      <p class="hero-label fade-up">פורטפוליו</p>
-      <h1 class="fade-up delay-1">
-        <span class="f">העבודות</span><br>שלנו
-      </h1>
-    </div>
+  <section>
+    <h1>העבודות שלנו</h1>
   </section>
 
-  <!-- VIDEO GRID -->
-  <section class="grid-section">
+  <section>
     <div id="works-grid">
-      <!-- skeletons shown while loading -->
-      <div class="work-skeleton"></div>
-      <div class="work-skeleton"></div>
-      <div class="work-skeleton"></div>
-      <div class="work-skeleton"></div>
-      <div class="work-skeleton"></div>
-      <div class="work-skeleton"></div>
+      <p>טוען סרטונים...</p>
     </div>
   </section>
 
-  <!-- LEAD FORM -->
-  <section class="works-form-section" id="contact">
-    <div class="container">
-      <div class="form-grid">
-        <div data-reveal>
-          <h2 class="form-headline">
-            <span class="f">מוכנים</span><br>
-            ליצור<br>
-            <span class="red">ביחד?</span>
-          </h2>
-          <p class="form-sub" style="margin-top:24px">
-            השאירו פרטים ונחזור אליכם לשיחת ייעוץ חינמית.
-          </p>
-        </div>
-        <div data-reveal>
-          <div class="lead-form-container" data-source="works"></div>
-        </div>
-      </div>
-    </div>
+  <section id="contact">
+    <h2>מוכנים ליצור ביחד?</h2>
+    <p>השאירו פרטים ונחזור אליכם לשיחת ייעוץ חינמית.</p>
+    <div class="lead-form-container" data-source="works"></div>
   </section>
 
-  <!-- FOOTER -->
-  <footer id="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-logo">
-        <img src="FRAMEIM_LOGO_WIDE.png" alt="פריימים" height="28" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-        <span class="logo-fallback" style="display:none">FRAME<span>IM</span></span>
-      </div>
-      <p class="footer-copy">כל הזכויות שמורות לסטודיו פריימים</p>
-      <div class="footer-social">
-        <a href="#" aria-label="אינסטגרם"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-        <a href="#" aria-label="פייסבוק"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-      </div>
-    </div>
+  <footer>
+    <p>כל הזכויות שמורות לסטודיו פריימים</p>
+    <a href="privacy.html">מדיניות פרטיות</a>
   </footer>
 
-  <!-- LIGHTBOX -->
-  <div id="lightbox" role="dialog" aria-modal="true" aria-label="נגן וידאו">
-    <button id="lightbox-close" aria-label="סגור">✕</button>
-    <div class="lightbox-inner" id="lightbox-inner">
-      <iframe id="lightbox-frame" allowfullscreen allow="autoplay"></iframe>
-    </div>
-  </div>
-
-  <button id="a11y-btn" aria-label="נגישות">♿</button>
-  <div id="a11y-menu"></div>
-  <div id="cookie-banner" role="alert">
-    <p>אנו משתמשים בעוגיות. <a href="privacy.html">מדיניות פרטיות</a></p>
-    <div class="cookie-actions">
-      <button class="cookie-btn cookie-accept" id="cookie-accept">אני מאשר</button>
-      <button class="cookie-btn cookie-decline" id="cookie-decline">דחה</button>
+  <div id="lightbox" style="display:none">
+    <button id="lightbox-close">סגור ✕</button>
+    <div id="lightbox-inner">
+      <iframe id="lightbox-frame" allowfullscreen allow="autoplay" style="width:100%;height:100%;border:none"></iframe>
     </div>
   </div>
 
   <script src="js/main.js"></script>
   <script>
     const WORKS_API = 'https://script.google.com/macros/s/AKfycbzLRTXhwajmDfceJrm4gBfv99jv8giHYONf7JBZUJ0Royis5vXvlQtoy3YJx3Ja9Cnq/exec?action=get_works';
-    const grid      = document.getElementById('works-grid');
-    const lightbox  = document.getElementById('lightbox');
-    const frame     = document.getElementById('lightbox-frame');
-    const lbInner   = document.getElementById('lightbox-inner');
+    const grid     = document.getElementById('works-grid');
+    const lightbox = document.getElementById('lightbox');
+    const frame    = document.getElementById('lightbox-frame');
 
-    // ── Fetch videos from Drive via Apps Script ──
     async function loadWorks() {
       try {
         const res  = await fetch(WORKS_API);
         const data = await res.json();
-
         grid.innerHTML = '';
-
         if (!data.videos || data.videos.length === 0) {
-          grid.innerHTML = '<div class="works-state">אין עבודות להצגה כרגע.</div>';
+          grid.innerHTML = '<p>אין עבודות להצגה כרגע.</p>';
           return;
         }
-
         data.videos.forEach(video => {
           const card = document.createElement('div');
-          card.className = 'work-card';
-          card.innerHTML = `
-            <img
-              src="${video.thumb}"
-              alt="${video.name}"
-              loading="lazy"
-              onerror="this.style.background='#1a1814';this.style.display='block'"
-            />
-            <div class="work-card-play">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="work-card-overlay">
-              <p class="work-card-name">${video.name}</p>
-            </div>
-          `;
-          card.addEventListener('click', () => openLightbox(video.embed, video.name));
+          card.innerHTML = `<a href="#" data-embed="${video.embed}">${video.name}</a>`;
+          card.querySelector('a').addEventListener('click', e => {
+            e.preventDefault();
+            frame.src = video.embed;
+            lightbox.style.display = 'block';
+          });
           grid.appendChild(card);
         });
-
       } catch {
-        grid.innerHTML = '<div class="works-state">לא ניתן לטעון את הסרטונים כרגע.<br>נסה לרענן את הדף.</div>';
+        grid.innerHTML = '<p>לא ניתן לטעון את הסרטונים כרגע. נסה לרענן את הדף.</p>';
       }
     }
 
-    // ── Lightbox ──
-    function openLightbox(embedUrl, name) {
-      frame.src = embedUrl;
-      // portrait if aspect ratio suggests vertical video
-      lbInner.classList.toggle('portrait', true); // Drive videos are usually 9:16
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      lightbox.style.display = 'none';
       frame.src = '';
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { lightbox.style.display = 'none'; frame.src = ''; }
+    });
 
     loadWorks();
   </script>
