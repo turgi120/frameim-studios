@@ -330,9 +330,12 @@
       padding: 32px 28px 44px;
       border: 1px solid #2c2c2c;
       position: relative;
-      transition: background 0.2s;
+      transition: background 0.25s, border-color 0.25s;
     }
-    .process-card:hover { background: #252525; }
+    .process-card:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
 
     .card-corner {
       width: 0; height: 0;
@@ -340,6 +343,10 @@
       border-width: 18px 18px 0 0;
       border-color: var(--red) transparent transparent transparent;
       margin-bottom: 22px;
+      transition: border-color 0.25s;
+    }
+    .process-card:hover .card-corner {
+      border-color: #000 transparent transparent transparent;
     }
 
     .card-num {
@@ -349,6 +356,10 @@
       line-height: 1;
       margin-bottom: 28px;
       letter-spacing: -0.02em;
+      transition: color 0.25s;
+    }
+    .process-card:hover .card-num {
+      color: rgba(0,0,0,0.15);
     }
 
     .card-title {
@@ -356,6 +367,10 @@
       font-weight: 800;
       color: #fff;
       margin-bottom: 14px;
+      transition: color 0.25s;
+    }
+    .process-card:hover .card-title {
+      color: #000;
     }
 
     .card-body {
@@ -363,6 +378,10 @@
       line-height: 1.75;
       color: #5a5a5a;
       font-weight: 400;
+      transition: color 0.25s;
+    }
+    .process-card:hover .card-body {
+      color: #000;
     }
 
     /* ─────────────────────────────
