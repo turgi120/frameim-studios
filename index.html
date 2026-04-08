@@ -3,67 +3,782 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>פריימים סטודיו | תוכן וידאו שיווקי</title>
+  <title>FRAMEIM | הפקות קריאטיב ומהלכי שיווק</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --red:    #E31E24;
+      --red-dk: #c01a1f;
+      --black:  #111111;
+      --white:  #ffffff;
+      --gray-bg: #e8e8e8;
+      --dark-bg: #181818;
+      --muted:  #888888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────
+       HEADER — iOS blur
+    ───────────────────────────── */
+    #site-header {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      z-index: 999;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: saturate(200%) blur(24px);
+      -webkit-backdrop-filter: saturate(200%) blur(24px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    /* Logo */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .logo-frame {
+      width: 26px;
+      height: 26px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-frame::before, .logo-frame::after,
+    .logo-frame span::before, .logo-frame span::after {
+      content: '';
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-color: var(--red);
+      border-style: solid;
+    }
+    .logo-frame::before  { top:0;    right:0;  border-width: 2.5px 2.5px 0 0; }
+    .logo-frame::after   { bottom:0; right:0;  border-width: 0 2.5px 2.5px 0; }
+    .logo-frame span::before { top:0;    left:0;  border-width: 2.5px 0 0 2.5px; }
+    .logo-frame span::after  { bottom:0; left:0;  border-width: 0 0 2.5px 2.5px; }
+    .logo-frame span { position: absolute; inset: 0; }
+
+    /* Nav pill */
+    .nav-pill {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(0,0,0,0.07);
+      border-radius: 100px;
+      padding: 5px 6px;
+    }
+
+    .nav-pill a {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--black);
+      text-decoration: none;
+      padding: 7px 20px;
+      border-radius: 100px;
+      transition: background 0.18s;
+    }
+
+    .nav-pill a:hover { background: rgba(0,0,0,0.09); }
+
+    /* Buttons */
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 26px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.14s;
+      white-space: nowrap;
+    }
+    .btn-red:hover { background: var(--red-dk); transform: translateY(-1px); }
+
+    .btn-gray {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.08);
+      color: var(--black);
+      text-decoration: none;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 26px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s;
+      white-space: nowrap;
+    }
+    .btn-gray:hover { background: rgba(0,0,0,0.13); }
+
+    /* ─────────────────────────────
+       HERO
+    ───────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      padding: 140px 52px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 12.5px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 36px;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    .hero-body {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 48px;
+    }
+
+    .hero-headline {
+      font-size: clamp(60px, 7.5vw, 108px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      color: var(--black);
+      flex: 1.2;
+    }
+
+    .hero-aside {
+      flex: 0 0 340px;
+      padding-bottom: 8px;
+    }
+
+    .hero-aside p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      margin-top: 56px;
+      align-items: center;
+    }
+
+    .hero-rule {
+      margin-top: 80px;
+      height: 1px;
+      width: 65%;
+      background: linear-gradient(to left, var(--red) 0%, rgba(227,30,36,0.2) 70%, transparent 100%);
+    }
+
+    /* ─────────────────────────────
+       ABOUT
+    ───────────────────────────── */
+    #about {
+      background: var(--gray-bg);
+      padding: 110px 52px;
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      min-height: 62vh;
+    }
+
+    .about-right { flex: 1; }
+
+    .about-title {
+      font-size: clamp(38px, 4.2vw, 64px);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--black);
+      margin-bottom: 40px;
+    }
+
+    .about-left {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .about-tagline {
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .about-desc {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #555;
+      font-weight: 400;
+    }
+
+    /* ─────────────────────────────
+       BRANDS BAR
+    ───────────────────────────── */
+    #brands {
+      background: var(--white);
+      padding: 52px 52px;
+      border-top: 1px solid #ececec;
+    }
+
+    .brands-label {
+      text-align: center;
+      font-size: 12.5px;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      font-weight: 500;
+    }
+
+    .brands-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 900;
+      color: #d0d0d0;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      cursor: default;
+    }
+    .brand-name:hover { color: #999; }
+
+    /* ─────────────────────────────
+       PROCESS — dark
+    ───────────────────────────── */
+    #process {
+      background: var(--dark-bg);
+      padding: 110px 52px 100px;
+      color: #fff;
+    }
+
+    .process-heading {
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 900;
+      line-height: 0.95;
+      color: #fff;
+      text-align: left;
+      margin-bottom: 80px;
+      letter-spacing: -0.025em;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .process-card {
+      background: #212121;
+      padding: 32px 28px 44px;
+      border: 1px solid #2c2c2c;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .process-card:hover { background: #252525; }
+
+    .card-corner {
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 18px 18px 0 0;
+      border-color: var(--red) transparent transparent transparent;
+      margin-bottom: 22px;
+    }
+
+    .card-num {
+      font-size: 56px;
+      font-weight: 900;
+      color: #2e2e2e;
+      line-height: 1;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .card-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #5a5a5a;
+      font-weight: 400;
+    }
+
+    /* ─────────────────────────────
+       WORKS (placeholder)
+    ───────────────────────────── */
+    #works {
+      background: var(--white);
+      padding: 110px 52px;
+    }
+
+    .works-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 4vw, 60px);
+      font-weight: 900;
+      color: var(--black);
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .work-placeholder-card {
+      aspect-ratio: 9/16;
+      background: #f4f4f4;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ccc;
+      font-size: 36px;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .work-placeholder-card:hover { background: #eeeeee; }
+
+    /* ─────────────────────────────
+       CONTACT
+    ───────────────────────────── */
+    #contact {
+      background: var(--white);
+      padding: 120px 52px 100px;
+      border-top: 1px solid #efefef;
+    }
+
+    .contact-inner {
+      max-width: 540px;
+    }
+
+    .contact-label {
+      font-size: 13px;
+      color: var(--red);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-label::before {
+      content: '—';
+    }
+
+    .contact-title {
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 52px;
+    }
+
+    .lead-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lead-form input {
+      font-family: 'Heebo', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--black);
+      padding: 16px 20px;
+      border: 1.5px solid #e2e2e2;
+      border-radius: 10px;
+      background: #fafafa;
+      direction: rtl;
+      outline: none;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .lead-form input:focus { border-color: var(--red); background: #fff; }
+    .lead-form input::placeholder { color: #bbb; }
+
+    .lead-form .submit-btn {
+      margin-top: 4px;
+      align-self: flex-start;
+      font-size: 16px;
+      padding: 16px 36px;
+    }
+
+    .form-feedback {
+      font-size: 14px;
+      font-weight: 500;
+      min-height: 20px;
+      padding: 4px 0;
+    }
+    .form-feedback.ok  { color: #1c8a40; }
+    .form-feedback.err { color: var(--red); }
+
+    /* ─────────────────────────────
+       FOOTER
+    ───────────────────────────── */
+    footer {
+      background: #111;
+      padding: 36px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    .footer-copy {
+      font-size: 12.5px;
+      color: #444;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 12.5px;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .footer-links a:hover { color: #fff; }
+
+    /* ─────────────────────────────
+       RESPONSIVE
+    ───────────────────────────── */
+    @media (max-width: 1024px) {
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .works-grid   { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      #site-header { padding: 0 20px; }
+      .nav-pill { display: none; }
+
+      #hero, #about, #process, #works, #contact, #brands { padding-right: 20px; padding-left: 20px; }
+
+      .hero-body { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .hero-aside { flex: unset; }
+      .hero-rule  { width: 90%; }
+
+      #about { flex-direction: column; gap: 40px; }
+      .about-left { max-width: 100%; }
+
+      .process-grid { grid-template-columns: 1fr; }
+      .works-grid   { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <a href="index.html">FRAMEIM סטודיו</a>
-    <nav>
-      <a href="index.html">בית</a>
-      <a href="works.html">עבודות</a>
-      <a href="#about">עלינו</a>
-      <a href="#contact">צור קשר</a>
+  <!-- ══ HEADER ══ -->
+  <header id="site-header">
+    <!-- Left: CTA (in RTL this renders on the left) -->
+    <a href="#contact" class="btn-red">בואו נדבר</a>
+
+    <!-- Center: Nav -->
+    <nav class="nav-pill">
+      <a href="#hero">בית</a>
+      <a href="#works">עבודות</a>
+      <a href="#about">אודות</a>
     </nav>
+
+    <!-- Right: Logo -->
+    <a href="#hero" class="logo-wrap">
+      <span class="logo-text">FRAMEIM</span>
+      <span class="logo-frame"><span></span></span>
+    </a>
   </header>
 
-  <section>
-    <h1>יוצרים אומנות, מדברים עסקים</h1>
-    <p>סטודיו לתוכן וידאו שיווקי</p>
-    <a href="#contact">בואו נעשה משהו יחד</a>
-    &nbsp;
-    <a href="works.html">לעבודות שלנו</a>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero">
+    <p class="hero-label">פריימים הפקות קריאטיב ומהלכי שיווק &nbsp;—</p>
+
+    <div class="hero-body">
+      <h1 class="hero-headline">יוצרים אומנות<br>מדברים עסקים</h1>
+
+      <div class="hero-aside">
+        <p>
+          לא כל סרטון מספר סיפור,<br>
+          לא כל סיפור מייצר תחושה.<br>
+          אנחנו משלבים את שניהם<br>
+          כדי ליצור קמפיין שיווקי מוצלח
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-red">התחל פרויקט</a>
+      <a href="#works"   class="btn-gray">לצפייה בעבודות</a>
+    </div>
+
+    <div class="hero-rule"></div>
   </section>
 
+
+  <!-- ══ ABOUT ══ -->
   <section id="about">
-    <h2>אנחנו פריימים</h2>
-    <p>
-      אנחנו מאמינים שדומה מושך דומה.<br>
-      תוכן זול ימשוך לקוח זול.<br>
-      תוכן איכותי ימשוך לקוח איכותי.
-    </p>
-    <p>
-      לכן בכל פרויקט אנחנו שואלים: מי הלקוח שאתה רוצה למשוך?
-      ומשם — בונים תוכן שמדבר אליו ישירות.
-    </p>
-    <a href="#contact">קביעת פגישה</a>
+    <div class="about-right">
+      <h2 class="about-title">נעים להכיר,<br>אנחנו פריימים</h2>
+      <a href="#works" class="btn-red">לצפייה בעבודות</a>
+    </div>
+
+    <div class="about-left">
+      <p class="about-tagline">בכל פריים מושקעת מחשבה<br>כל מסר פוגע בול</p>
+      <p class="about-desc">
+        אנחנו סטודיו לתוכן וידאו שיווקי שמאמין שדומה מושך דומה —
+        תוכן זול ימשוך לקוח זול, תוכן איכותי ימשוך לקוח איכותי.
+        בכל פרויקט אנחנו שואלים: מי הלקוח שאתה רוצה למשוך?
+        ומשם בונים תוכן שמדבר אליו ישירות.
+      </p>
+    </div>
   </section>
 
-  <section>
-    <h2>הגישה שלנו</h2>
-    <ol>
-      <li>דומה מושך דומה</li>
-      <li>תוכן איכותי ימשוך לקוח איכותי</li>
-      <li>כל פריים הוא הצהרה עסקית</li>
-    </ol>
+
+  <!-- ══ BRANDS BAR ══ -->
+  <section id="brands">
+    <p class="brands-label">מותגים שבחרו לשדרג את הפריימים</p>
+    <div class="brands-list">
+      <span class="brand-name">Studio Pro</span>
+      <span class="brand-name">BrandX</span>
+      <span class="brand-name">Ventures</span>
+      <span class="brand-name">MediaCo</span>
+      <span class="brand-name">Atlas</span>
+    </div>
   </section>
 
-  <section>
-    <h2>העבודות שלנו</h2>
-    <a href="works.html">לכל העבודות</a>
+
+  <!-- ══ PROCESS ══ -->
+  <section id="process">
+    <h2 class="process-heading">איך זה<br>הולך לעבוד</h2>
+
+    <div class="process-grid">
+
+      <div class="process-card">
+        <div class="card-corner"></div>
+        <div class="card-num">01</div>
+        <h3 class="card-title">מה השאיפות?</h3>
+        <p class="card-body">
+          אנחנו צוללים לעולם המקצועי שלך, למדרים את הקהל ואת המתחרים בתחום שלך,
+          ומתחילים יחד לגבש אסטרטגיה חדה ומדויקת.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <div class="card-corner"></div>
+        <div class="card-num">02</div>
+        <h3 class="card-title">קונספט</h3>
+        <p class="card-body">
+          אנחנו מגבשים רעיון מבריק שמתממשק עם החזון שלך ותואם את המסרות העסקיות.
+          מגבשים כיוון ברור לפני שמתחילים ליצור את הפריים הראשון.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <div class="card-corner"></div>
+        <div class="card-num">03</div>
+        <h3 class="card-title">זמן מסך</h3>
+        <p class="card-body">
+          אנחנו נדאג להפקה, לצילומים ולערכות וידאו — וכל זה בסטנדרד ללא פשרות.
+          ציוד מתקדם ורמת הרשמה גבוהה עוד ארוכה.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <div class="card-corner"></div>
+        <div class="card-num">04</div>
+        <h3 class="card-title">השקה ותוצאות</h3>
+        <p class="card-body">
+          אנחנו לא נעלמים אחרי הגשה. מלווים את ההפצה, בודקים ביצועים, ומתאימים
+          כדי לוודא שכל פריים ממשיך לעבוד בשבילך לאורך זמן.
+        </p>
+      </div>
+
+    </div>
   </section>
 
+
+  <!-- ══ WORKS ══ -->
+  <section id="works">
+    <div class="works-header">
+      <h2 class="section-title">העבודות שלנו</h2>
+      <a href="#contact" class="btn-gray" style="font-size:14px; padding:10px 20px">לכל הפרויקטים ←</a>
+    </div>
+
+    <div class="works-grid">
+      <div class="work-placeholder-card">▶</div>
+      <div class="work-placeholder-card">▶</div>
+      <div class="work-placeholder-card">▶</div>
+    </div>
+  </section>
+
+
+  <!-- ══ CONTACT ══ -->
   <section id="contact">
-    <h2>בואו נעשה ביחד</h2>
-    <p>השאירו פרטים ונחזור אליכם לשיחת ייעוץ חינמית.</p>
-    <div class="lead-form-container" data-source="homepage"></div>
+    <div class="contact-inner">
+      <p class="contact-label">צור קשר</p>
+      <h2 class="contact-title">בואו נדבר</h2>
+
+      <form class="lead-form" id="lead-form" novalidate>
+        <input type="text"  name="name"    placeholder="שם מלא"  autocomplete="name"  required />
+        <input type="tel"   name="phone"   placeholder="טלפון"    autocomplete="tel"   required />
+        <input type="email" name="email"   placeholder="אימייל"   autocomplete="email" required />
+        <!-- honeypot -->
+        <input type="text"  name="website" style="display:none" tabindex="-1" autocomplete="off" />
+        <button type="submit" class="btn-red submit-btn">שלח פרטים ←</button>
+        <p class="form-feedback" id="form-msg"></p>
+      </form>
+    </div>
   </section>
 
+
+  <!-- ══ FOOTER ══ -->
   <footer>
-    <p>כל הזכויות שמורות לסטודיו פריימים</p>
-    <a href="privacy.html">מדיניות פרטיות</a>
+    <span class="footer-logo">FRAMEIM</span>
+    <span class="footer-copy">© 2025 כל הזכויות שמורות לסטודיו פריימים</span>
+    <div class="footer-links">
+      <a href="#">אינסטגרם</a>
+      <a href="#">פייסבוק</a>
+      <a href="privacy.html">פרטיות</a>
+    </div>
   </footer>
 
-  <script src="js/main.js"></script>
+
+  <script>
+    /* ─ Lead form ─ */
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLRTXhwajmDfceJrm4gBfv99jv8giHYONf7JBZUJ0Royis5vXvlQtoy3YJx3Ja9Cnq/exec';
+
+    const form  = document.getElementById('lead-form');
+    const msgEl = document.getElementById('form-msg');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (form.website.value) return; // honeypot
+
+      const name  = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const email = form.email.value.trim();
+
+      if (!name || !phone || !email) {
+        msgEl.className = 'form-feedback err';
+        msgEl.textContent = 'יש למלא את כל השדות';
+        return;
+      }
+
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'שולח...';
+      msgEl.className = 'form-feedback';
+      msgEl.textContent = '';
+
+      const fd = new FormData();
+      fd.append('name',   name);
+      fd.append('phone',  phone);
+      fd.append('email',  email);
+      fd.append('source', 'homepage');
+      fd.append('date',   new Date().toLocaleString('he-IL'));
+
+      try {
+        const res  = await fetch(SCRIPT_URL, { method: 'POST', body: fd });
+        const data = await res.json();
+        if (data.result === 'success') {
+          form.reset();
+          msgEl.className = 'form-feedback ok';
+          msgEl.textContent = '✓ פרטייך התקבלו! ניצור איתך קשר בהקדם.';
+        } else throw new Error();
+      } catch {
+        msgEl.className = 'form-feedback err';
+        msgEl.textContent = 'משהו השתבש — נסה שוב';
+        btn.disabled = false;
+        btn.textContent = 'שלח פרטים ←';
+      }
+    });
+
+    /* ─ Active nav on scroll ─ */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-pill a');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const link = document.querySelector(`.nav-pill a[href="#${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
 </body>
 </html>
