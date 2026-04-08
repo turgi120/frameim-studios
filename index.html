@@ -35,24 +35,26 @@
       position: fixed;
       width: 10px;
       height: 10px;
-      background: #c4531a;
+      background: var(--red);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
       transition: width 0.2s ease, height 0.2s ease;
       transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
     }
 
     .cursor-ring {
       position: fixed;
       width: 36px;
       height: 36px;
-      border: 1px solid #c4531a;
+      border: 1.5px solid var(--red);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
       transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
       transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
     }
 
     /* ─────────────────────────────
