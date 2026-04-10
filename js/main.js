@@ -273,22 +273,62 @@ function initMobileNav() {
    SCROLL ANIMATIONS
    ══════════════════════════════════════ */
 function initScrollAnim() {
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('[data-reveal]').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(28px)';
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    obs.observe(el);
+  // ── 1. Split [data-split] headlines into word spans ──
+  document.querySelectorAll('[data-split]').forEach(el => {
+    // Preserve <br> tags, split everything else into word spans
+    const raw = el.innerHTML;
+    const tokens = raw.split(/(<br\s*\/?>)/gi);
+    el.innerHTML = tokens.map(token => {
+      if (/^<br/i.test(token)) return token;
+      return token.split(/\s+/).filter(Boolean).map(word =>
+        `<span class="word-outer"><span class="word-inner">${word}</span></span>`
+      ).join(' ');
+    }).join('');
   });
+
+  // ── 2. Observer for plain [data-reveal] elements ──
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const delay = parseInt(el.dataset.delay || '0');
+      setTimeout(() => el.classList.add('is-visible'), delay);
+      revealObs.unobserve(el);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  // ── 3. Observer for [data-split] — stagger each word ──
+  const splitObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const base = parseInt(el.dataset.delay || '0');
+      el.querySelectorAll('.word-inner').forEach((w, i) => {
+        w.style.transitionDelay = (base + i * 75) + 'ms';
+        w.style.transform = 'translateY(0)';
+      });
+      splitObs.unobserve(el);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+  // ── 4. Observer for [data-stagger] — stagger children ──
+  const staggerObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const ms = parseInt(entry.target.dataset.stagger || '100');
+      entry.target.querySelectorAll('[data-reveal]').forEach((child, i) => {
+        setTimeout(() => child.classList.add('is-visible'), i * ms);
+      });
+      staggerObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+
+  // Observe — skip stagger-children in revealObs (handled by staggerObs)
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    if (!el.closest('[data-stagger]')) revealObs.observe(el);
+  });
+  document.querySelectorAll('[data-split]').forEach(el => splitObs.observe(el));
+  document.querySelectorAll('[data-stagger]').forEach(el => staggerObs.observe(el));
 }
 
 /* ══════════════════════════════════════
