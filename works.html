@@ -57,11 +57,11 @@
         const res  = await fetch(WORKS_API);
         const data = await res.json();
         grid.innerHTML = '';
-        if (!data.videos || data.videos.length === 0) {
-          grid.innerHTML = '<p>אין עבודות להצגה כרגע.</p>';
-          return;
-        }
-        data.videos.forEach(video => {
+        if (!data.videos) data.videos = [];
+        const hardcoded = [
+          { name: 'סרטון', embed: 'https://www.youtube.com/embed/hTdSU7q5WCo' }
+        ];
+        [...hardcoded, ...data.videos].forEach(video => {
           const card = document.createElement('div');
           card.innerHTML = `<a href="#" data-embed="${video.embed}">${video.name}</a>`;
           card.querySelector('a').addEventListener('click', e => {
